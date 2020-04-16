@@ -46,7 +46,6 @@ provider:
   memorySize: 512
   versionFunctions: false
   timeout: 30
-  profile: cesko.digital # Profil z ~/.aws/credentials
 
 package:
   artifact: ./build/libs/service-airtable-${opt:version, ''}-all.jar
