@@ -22,6 +22,12 @@ functions:
       - http:
           path: unsubscribe
           method: get
+  check:
+    handler: lambda.Check
+    events:
+      - http:
+          path: check
+          method: get
 
 custom:
   stage: ${opt:stage, self:provider.stage}
