@@ -49,7 +49,7 @@ class Unsubscribe : RequestHandler<Any, HtmlResponse> {
             body {
                 style = "text-align: center; padding: 32px;"
                 h1 {
-                    +"Úspěšně odhlášeno"
+                    +"Úspěšně odhlášeno!"
                 }
             }
         }
