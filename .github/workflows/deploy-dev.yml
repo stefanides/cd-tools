@@ -18,4 +18,6 @@ jobs:
     - run: npm i -g serverless
     - run: npm i serverless-domain-manager --save-dev
     - run: ./gradlew deploy-lambda-dev --no-daemon
-  
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.aws_access_key_id }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.aws_secret_access_key }}
