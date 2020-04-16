@@ -17,5 +17,5 @@ jobs:
     - uses: actions/setup-node@v1
     - run: npm i -g serverless
     - run: npm i serverless-domain-manager --save-dev
-    - run: gradlew deploy-lambda-dev --no-daemon
+    - run: ./gradlew deploy-lambda-dev --no-daemon
   
