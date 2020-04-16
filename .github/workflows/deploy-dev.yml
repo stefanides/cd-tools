@@ -15,8 +15,8 @@ jobs:
       with:
         java-version: 11
     - uses: actions/setup-node@v1
-    - run: npm i serverless
-    - run: npm i serverless-domain-manager
+    - run: npm i -g serverless
+    - run: npm i -g serverless-domain-manager
     - uses: eskatos/gradle-command-action@v1
       with:
         arguments: deploy-lambda-dev
