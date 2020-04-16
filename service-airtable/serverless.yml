@@ -14,7 +14,7 @@ provider:
   profile: cesko.digital # Name of the profile for AWS Credentials
 
 package:
-  artifact: ./build/libs/service-airtable-${opt:version, ''}-all.jar
+  artifact: ./build/libs/service-airtable-all.jar
 
 functions:
   unsubscribe:
