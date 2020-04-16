@@ -25,8 +25,7 @@ dependencies {
 }
 
 tasks.register<Exec>("deploy-lambda-dev") {
-    executable("sh")
-    args("-c","serverless deploy -s dev --version $version")
+    commandLine("serverless", "deploy", "-s", "dev", "--version", "$version")
     dependsOn("clean", "shadowJar")
     tasks.findByName("shadowJar")?.mustRunAfter("clean")
     group = "aws-dev"
