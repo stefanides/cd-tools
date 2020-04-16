@@ -11,7 +11,6 @@ provider:
   memorySize: 512
   versionFunctions: false
   timeout: 30
-  profile: cesko.digital # Name of the profile for AWS Credentials
 
 package:
   artifact: ./build/libs/service-airtable-all.jar
