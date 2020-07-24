@@ -5,18 +5,29 @@ import stringify from "csv-stringify/lib/sync";
 export default async (req: NowRequest, res: NowResponse) => {
   try {
     const token = process.env.SLACK_TOKEN as string;
-    const channel = req.query.channel as string;
-    const userIds = await getAllChannelMembers(token, channel);
-    const users = await Promise.all(
-      userIds.map((id: string) => getUserInfo(token, id))
-    );
-    res.setHeader("Content-Type", "text/csv");
-    res.status(200).send(
-      stringify(users, {
-        delimiter: ",",
-        header: true,
-      })
-    );
+    const channel = req.query.channel as string | null;
+    if (channel != null) {
+      const userIds = await getAllChannelMembers(token, channel);
+      const users = await Promise.all(
+        userIds.map((id: string) => getUserInfo(token, id))
+      );
+      res.setHeader("Content-Type", "text/csv");
+      res.status(200).send(
+        stringify(users, {
+          delimiter: ",",
+          header: true,
+        })
+      );
+    } else {
+      const response = await slack.conversations.list({ token });
+      const channels = response.channels.filter(
+        (ch: any) => ch.is_archived === false
+      );
+      const links = channels.map((channel: any) => {
+        return `<a href="?channel=${channel.id}">${channel.name}</a>`;
+      });
+      res.status(200).send(links.join("<br>"));
+    }
   } catch (e) {
     res.status(500).send(`Error: ${e}`);
   }
