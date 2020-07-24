@@ -1,0 +1,16 @@
+{
+  "name": "cd-tools",
+  "version": "1.0.0",
+  "description": "Various Česko.Digital glue scripts",
+  "repository": "https://github.com/cesko-digital/cd-tools.git",
+  "author": "Tomáš Znamenáček <tomas.znamenacek@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "@now/node": "^1.5.1"
+  },
+  "dependencies": {
+    "@types/airtable": "^0.5.7",
+    "airtable": "^0.8.1"
+  }
+}
