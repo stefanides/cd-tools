@@ -10,10 +10,10 @@ export default async (req: NowRequest, res: NowResponse) => {
     const users = await Promise.all(
       userIds.map((id: string) => getUserInfo(token, id))
     );
-    res.setHeader("Content-Type", "application/json");
+    res.setHeader("Content-Type", "text/csv");
     res.status(200).send(
       stringify(users, {
-        delimiter: ";",
+        delimiter: ",",
         header: true,
       })
     );
