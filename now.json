@@ -2,5 +2,11 @@
     "env": {
         "AIRTABLE_API_KEY": "@airtable-api-key",
         "SLACK_TOKEN": "@slack-token"
-    }
+    },
+    "redirects": [
+        {
+            "source": "/",
+            "destination": "https://github.com/cesko-digital/cd-tools"
+        }
+    ]
 }
