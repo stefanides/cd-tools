@@ -8,5 +8,11 @@
             "source": "/",
             "destination": "https://github.com/cesko-digital/cd-tools"
         }
+    ],
+    "rewrites": [
+        {
+            "source": "/list-users",
+            "destination": "/api/list-users"
+        }
     ]
 }
