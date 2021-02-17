@@ -13,6 +13,10 @@
         {
             "source": "/list-users",
             "destination": "/api/list-users"
+        },
+        {
+            "source": "/open-positions",
+            "destination": "/api/open-positions"
         }
     ]
 }
