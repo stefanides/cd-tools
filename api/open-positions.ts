@@ -3,6 +3,8 @@ import { NowRequest, NowResponse } from "@now/node";
 
 interface JobRecord {
   "Stav": "Aktivní" | "Obsazeno";
+  "Projekt": string[] | null;
+  "Poptávané kompetence": string[] | null;
   "Úkol/Role": string;
   "Odkaz na celou příležitost": string | null;
   "Detaily": string | null;
@@ -12,13 +14,13 @@ interface JobRecord {
 
 interface Position {
   title: string;
-  projectName: string;
+  projectName: string[];
   isOpen: boolean;
   isUrgent: boolean;
-  detailUrl?: string;
-  description?: string;
-  timeRequirements?: string;
-  expertise?: string;
+  detailUrl: string | null;
+  description: string | null;
+  timeRequirements: string | null;
+  expertise: string[];
 }
 
 export default async (req: NowRequest, res: NowResponse) => {
@@ -28,10 +30,13 @@ export default async (req: NowRequest, res: NowResponse) => {
       "Hledané role a úkoly - To Be Moved"
     );
     const records = await table.select({ view: "Otevřené role" }).all();
-    res.json(records.map(parseRecord));
+    const out = JSON.stringify(records.map(parseRecord), null, 2);
+    // We don’t use res.json() here intentionally to get pretty printing
+    res.setHeader("Content-Type", "application/json");
+    res.status(200).send(out);
   } catch (e) {
     console.error(e);
-    res.status(500).send('Internal Server Error');
+    res.status(500).send("Internal Server Error");
   }
 };
 
@@ -39,12 +44,12 @@ function parseRecord(record: Airtable.Record<JobRecord>): Position {
   const fields = record.fields;
   return {
     title: fields["Úkol/Role"],
-    projectName: fields["Projekt"],
+    projectName: fields["Projekt"] || [],
     isOpen: fields["Stav"] === "Aktivní",
     isUrgent: fields["Urgentní poptávka"],
     detailUrl: fields["Odkaz na celou příležitost"],
     description: fields["Detaily"],
     timeRequirements: fields["Časová náročnost"],
-    expertise: fields["Poptávané kompetence"],
+    expertise: fields["Poptávané kompetence"] || [],
   };
 }
