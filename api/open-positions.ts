@@ -14,9 +14,9 @@ interface Position {
   title: string;
   isOpen: boolean;
   isUrgent: boolean;
-  detailUrl: string | null;
-  description: string | null;
-  timeRequirements: string | null;
+  detailUrl?: string;
+  description?: string;
+  timeRequirements?: string;
 }
 
 export default async (req: NowRequest, res: NowResponse) => {
