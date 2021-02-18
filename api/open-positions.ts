@@ -12,11 +12,13 @@ interface JobRecord {
 
 interface Position {
   title: string;
+  projectName: string;
   isOpen: boolean;
   isUrgent: boolean;
   detailUrl?: string;
   description?: string;
   timeRequirements?: string;
+  expertise?: string;
 }
 
 export default async (req: NowRequest, res: NowResponse) => {
@@ -33,13 +35,15 @@ export default async (req: NowRequest, res: NowResponse) => {
 };
 
 function parseRecord(record: Airtable.Record<JobRecord>): Position {
-  const f = record.fields;
+  const fields = record.fields;
   return {
-    title: f["Úkol/Role"],
-    isOpen: f["Stav"] === "Aktivní",
-    isUrgent: f["Urgentní poptávka"],
-    detailUrl: f["Odkaz na celou příležitost"],
-    description: f["Detaily"],
-    timeRequirements: f["Časová náročnost"],
+    title: fields["Úkol/Role"],
+    projectName: fields["Projekt"],
+    isOpen: fields["Stav"] === "Aktivní",
+    isUrgent: fields["Urgentní poptávka"],
+    detailUrl: fields["Odkaz na celou příležitost"],
+    description: fields["Detaily"],
+    timeRequirements: fields["Časová náročnost"],
+    expertise: fields["Poptávané kompetence"],
   };
 }
