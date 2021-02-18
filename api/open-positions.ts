@@ -26,9 +26,7 @@ export default async (req: NowRequest, res: NowResponse) => {
       "Hledané role a úkoly - To Be Moved"
     );
     const records = await table.select({ view: "Otevřené role" }).all();
-    const out = JSON.stringify(records.map(parseRecord), null, 2);
-    res.setHeader("Content-Type", "application/json");
-    res.status(200).send(out);
+    res.json(records.map(parseRecord));
   } catch (e) {
     res.status(500).send(`Error: ${e}`);
   }
