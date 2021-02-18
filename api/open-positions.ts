@@ -30,7 +30,8 @@ export default async (req: NowRequest, res: NowResponse) => {
     const records = await table.select({ view: "Otevřené role" }).all();
     res.json(records.map(parseRecord));
   } catch (e) {
-    res.status(500).send(`Error: ${e}`);
+    console.error(e);
+    res.status(500).json({message: 'Internal Server Error: Inspect the Vercel logs for more information.'});
   }
 };
 
