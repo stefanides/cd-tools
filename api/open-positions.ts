@@ -31,7 +31,7 @@ export default async (req: NowRequest, res: NowResponse) => {
     res.json(records.map(parseRecord));
   } catch (e) {
     console.error(e);
-    res.status(500).json({message: 'Internal Server Error: Inspect the Vercel logs for more information.'});
+    res.status(500).send('Internal Server Error');
   }
 };
 
