@@ -59,25 +59,43 @@ function viewPositions(positions: Position[]): string {
     .filter((p) => !isFullTime(p))
     .map(viewPosition);
   return [
-    elem("h2", "Hledané pozice"),
-    elem("p", "Dobrovolnické pozice"),
+    stylesheet(
+      "https://cdnjs.cloudflare.com/ajax/libs/milligram/1.3.0/milligram.css"
+    ),
+    elem("style", {}, "body { width: 120ex; margin: auto; padding: 10ex; }"),
+    elem("h1", {}, "Hledané pozice"),
+    elem("h2", {}, "Dobrovolnické pozice"),
     ul(volunteerJobs),
-    elem("p", "Placené pozice"),
+    elem("h2", {}, "Placené pozice"),
     ul(fullTimeJobs),
   ].join("\n");
 }
 
 function viewPosition(p: Position): string {
   const lead = p.detailUrl
-    ? `<a href="${p.detailUrl}">${p.title}</a>`
+    ? elem("a", { href: p.detailUrl }, p.title)
     : p.title;
   return p.description ? `${lead} • ${p.description}` : lead;
 }
 
 function ul(items: string[]): string {
-  return elem("ul", items.map((i) => elem("li", i)).join("\n"));
+  return elem("ul", {}, items.map((i) => elem("li", {}, i)).join("\n"));
 }
 
-function elem(name: string, contents: string): string {
-  return `<${name}>${contents}</${name}>`;
+function stylesheet(src: string): string {
+  return elem("link", {
+    rel: "stylesheet",
+    href: src,
+  });
+}
+
+function elem(
+  name: string,
+  atts: { [key: string]: string },
+  contents: string = ""
+): string {
+  const flatAtts = Object.entries(atts)
+    .map(([k, v]) => `${k}=${v}`)
+    .join(" ");
+  return `<${name} ${flatAtts}>${contents}</${name}>`;
 }
