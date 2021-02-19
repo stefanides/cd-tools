@@ -10,9 +10,12 @@
     "@now/node": "^1.5.1"
   },
   "dependencies": {
-    "@types/airtable": "^0.5.7",
-    "airtable": "^0.8.1",
+    "@types/airtable": "^0.8.1",
+    "airtable": "^0.10.1",
     "csv-stringify": "^5.5.0",
     "slack": "^11.0.2"
+  },
+  "prettier": {
+    "quoteProps": "consistent"
   }
 }

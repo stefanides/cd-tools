@@ -13,6 +13,10 @@
         {
             "source": "/list-users",
             "destination": "/api/list-users"
+        },
+        {
+            "source": "/newsletter-positions",
+            "destination": "/api/newsletter-positions"
         }
     ]
 }
