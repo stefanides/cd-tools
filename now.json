@@ -1,7 +1,8 @@
 {
     "env": {
         "AIRTABLE_API_KEY": "@airtable-api-key",
-        "SLACK_TOKEN": "@slack-token"
+        "SLACK_TOKEN": "@slack-token",
+        "API_STORE_TOKEN": "@api-store-token"
     },
     "redirects": [
         {
@@ -13,6 +14,10 @@
         {
             "source": "/list-users",
             "destination": "/api/list-users"
-        }
+        },
+        {
+            "source": "/nedluzim-statu,
+            "destination": "/api/api-store-proxy"
+        },
     ]
 }
